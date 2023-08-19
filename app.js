@@ -4,8 +4,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-import { getFirestore , collection, addDoc } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
-const db = getFirestore(app);
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+} from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRdwI7MsBM7-ktK4A45FduIptdNMXYnak",
@@ -18,6 +22,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 let signUpEmail = document.getElementById("signUpEmail");
 let signUpPassword = document.getElementById("signUpPassword");
 let signUpBtn = document.getElementById("signUpBtn");
@@ -61,58 +66,49 @@ signInBtn &&
   });
 
 let ProfileBtn = document.getElementById("ProfileBtn");
-let signUp_signIn = document.getElementById("signIN&signUPBtn")
+let signUp_signIn = document.getElementById("signIN&signUPBtn");
 
-ProfileBtn && ProfileBtn.addEventListener("click", () => {
-  console.log("profile")
- location.href = "profile.html"
-});
+ProfileBtn &&
+  ProfileBtn.addEventListener("click", () => {
+    console.log("profile");
+    location.href = "profile.html";
+  });
 
-signUp_signIn && signUp_signIn.addEventListener("click" , () => {
-  location.href = "signUp.html"
-})
-
-
+signUp_signIn &&
+  signUp_signIn.addEventListener("click", () => {
+    location.href = "signUp.html";
+  });
 
 let homepage = document.getElementById("homepage");
+let blogtitle = document.getElementById("blogtitle");
 
-homepage && homepage.addEventListener("click" , () => {
-  location.href = "index.html"
-})
+homepage &&
+  homepage.addEventListener("click", () => {
+    location.href = "index.html";
+  });
 
-let  postData = async()=>{
-
+let postData = async () => {
   try {
     const docRef = await addDoc(collection(db, "blog"), {
-      first: "Ada",
-      last: "Lovelace",
-      born: 1815
+      title: blogtitle.value,
+      blog: blogtext.value,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+};
 
-}
+let postBlog = document.getElementById("post-blog");
 
+postBlog.addEventListener("click", postData);
 
+const getblogs = () => {
+  onSnapshot(collection(db, "blog"), (data) => {
+    data.docChanges().forEach((change) => {
+      console.log("change", change.doc.data());
+    });
+  });
+};
 
-
-
-
-let postBlog = document.getElementById("post-blog")
-
-
-// postBlog.addEventListener("click" )
-
-
-
-
-
-
-
-
-
-
-
-
+getblogs();
