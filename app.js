@@ -9,6 +9,7 @@ import {
   collection,
   addDoc,
   onSnapshot,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -42,7 +43,12 @@ signUpBtn &&
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        Swal.fire({
+          icon: 'error',
+          title: "Sorry",
+          text: errorMessage
+          
+      })
       });
   });
 
@@ -99,37 +105,30 @@ let postData = async () => {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function deletetodo(id) {
+  console.log(id);
+}
 
 let postBlog = document.getElementById("post-blog");
 
-postBlog.addEventListener("click", postData);
-let mainDiv = document.getElementById("mainDiv")
+postBlog && postBlog.addEventListener("click", postData);
+let mainDiv = document.getElementById("mainDiv");
 
 const getblogs = () => {
   onSnapshot(collection(db, "blog"), (data) => {
     data.docChanges().forEach((change) => {
-const getBlogTitle = change.doc.data().title
-const getBlogtex = change.doc.data().blog
-mainDiv.innerHTML += `
+      console.log(change);
+      const getBlogTitle = change.doc.data().title;
+      const getBlogtex = change.doc.data().blog;
+      mainDiv.innerHTML += `
 <div class="card cardBlog text-center mt-5 justify-content-around">
           <h2 class="card-header background-color">Blog</h2>
           <div class="card-body">
-            <img src="pexels-mohamed-abdelghaffar-771742.jpg" alt="" />
+          <img
+          class="profile-img"
+          src="121400813.png"
+          alt=""
+        />
             <h5 class="card-title blog-title">${getBlogTitle}</h5>
             <p class="profile-user-name">User Name : Muhammad Ahmed</p>
             <p class="card-text">
@@ -139,11 +138,10 @@ mainDiv.innerHTML += `
             <a href="#" class="btn button-bg">Edit</a>
           </div>
           
-        </div>`
-      
+        </div>`;
+        blogtitle.value = "";
+        blogtext.value = "";
     });
-    blogtitle.value = ""
-    blogtext.value = ""
   });
 };
 
