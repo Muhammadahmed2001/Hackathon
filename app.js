@@ -99,15 +99,51 @@ let postData = async () => {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let postBlog = document.getElementById("post-blog");
 
 postBlog.addEventListener("click", postData);
+let mainDiv = document.getElementById("mainDiv")
 
 const getblogs = () => {
   onSnapshot(collection(db, "blog"), (data) => {
     data.docChanges().forEach((change) => {
-      console.log("change", change.doc.data());
+const getBlogTitle = change.doc.data().title
+const getBlogtex = change.doc.data().blog
+mainDiv.innerHTML += `
+<div class="card cardBlog text-center mt-5 justify-content-around">
+          <h2 class="card-header background-color">Blog</h2>
+          <div class="card-body">
+            <img src="pexels-mohamed-abdelghaffar-771742.jpg" alt="" />
+            <h5 class="card-title blog-title">${getBlogTitle}</h5>
+            <p class="profile-user-name">User Name : Muhammad Ahmed</p>
+            <p class="card-text">
+              ${getBlogtex}
+            </p>
+            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="#" class="btn button-bg">Edit</a>
+          </div>
+          
+        </div>`
+      
     });
+    blogtitle.value = ""
+    blogtext.value = ""
   });
 };
 

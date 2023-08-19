@@ -217,7 +217,12 @@
     justify-content: center;
     align-items: center;
 
+
 }
+.blog-div{
+ margin-left: 20%;
+}
+
 
 .card-body{
     text-align: left;
@@ -227,11 +232,13 @@
     width: 500px;
     
 }
+
+
 .blog-sec{
     height: 450px;;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
 
 }
 .button-bg{
@@ -258,6 +265,7 @@
 }
 .blog-title{
     display: inline-block;
+    font-size: 35px;
 }
 
 
@@ -297,6 +305,9 @@
     align-items: center;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
+}
+.profile-user-name{
+    color: rgb(185, 176, 176);
 }
 
 
