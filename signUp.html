@@ -4,34 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-
     <title>Document</title>
   </head>
   <body>
     <div class="contanair">
       <div class="form-box">
         <div class="form">
-          <span class="title">Sign In</span>
-          <span class="subtitle">Sign in to your account</span>
+          <span class="title">Sign up</span>
+          <span class="subtitle">Create a free account with your email.</span>
           <div class="form-container">
             <input
-              id="signInEmail"
+              id="userName"
+              type="text"
+              class="input"
+              value=""
+              placeholder="Enter your full name"
+            />
+            <input
+              id="signUpEmail"
               type="email"
               class="input"
+              value=""
               placeholder="Email"
             />
             <input
-              id="signInPassword"
+              id="signUpPassword"
               type="password"
               class="input"
               placeholder="Password"
             />
           </div>
-          <button id="signInBtn">Sign in</button>
+          <button id="signUpBtn">Sign up</button>
         </div>
-
         <div class="form-section">
-          <p>No account? <a href="signUp.html">Sign Up</a></p>
+          <p>Have an account? <a href="signin.html">Log in</a></p>
         </div>
       </div>
     </div>
